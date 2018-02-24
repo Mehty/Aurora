@@ -15,6 +15,11 @@
 		133B63F520413A03006DDB15 /* AuroraUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 133B63F420413A03006DDB15 /* AuroraUITests.swift */; };
 		133B64062041463B006DDB15 /* GoogLeNetPlaces.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 133B64052041463B006DDB15 /* GoogLeNetPlaces.mlmodel */; };
 		133B640820414651006DDB15 /* Resnet50.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 133B640720414651006DDB15 /* Resnet50.mlmodel */; };
+		133B640A20416E07006DDB15 /* Inceptionv3.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 133B640920416E07006DDB15 /* Inceptionv3.mlmodel */; };
+		133B640C20416E0E006DDB15 /* MobileNet.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 133B640B20416E0E006DDB15 /* MobileNet.mlmodel */; };
+		133B640E20416E15006DDB15 /* SqueezeNet.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 133B640D20416E15006DDB15 /* SqueezeNet.mlmodel */; };
+		133B641020416FCD006DDB15 /* VGG16.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 133B640F20416FCC006DDB15 /* VGG16.mlmodel */; };
+		133B641220417361006DDB15 /* OCR.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 133B641120417360006DDB15 /* OCR.mlmodel */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +54,11 @@
 		133B63F620413A03006DDB15 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		133B64052041463B006DDB15 /* GoogLeNetPlaces.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; name = GoogLeNetPlaces.mlmodel; path = ../../../.Trash/GoogLeNetPlaces.mlmodel; sourceTree = "<group>"; };
 		133B640720414651006DDB15 /* Resnet50.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; name = Resnet50.mlmodel; path = ../../../Downloads/Resnet50.mlmodel; sourceTree = "<group>"; };
+		133B640920416E07006DDB15 /* Inceptionv3.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; name = Inceptionv3.mlmodel; path = ../../../Downloads/Inceptionv3.mlmodel; sourceTree = "<group>"; };
+		133B640B20416E0E006DDB15 /* MobileNet.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; name = MobileNet.mlmodel; path = ../../../Downloads/MobileNet.mlmodel; sourceTree = "<group>"; };
+		133B640D20416E15006DDB15 /* SqueezeNet.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; name = SqueezeNet.mlmodel; path = ../../../Downloads/SqueezeNet.mlmodel; sourceTree = "<group>"; };
+		133B640F20416FCC006DDB15 /* VGG16.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; name = VGG16.mlmodel; path = ../../../Downloads/VGG16.mlmodel; sourceTree = "<group>"; };
+		133B641120417360006DDB15 /* OCR.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; name = OCR.mlmodel; path = ../../../Downloads/OCR.mlmodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,7 +109,12 @@
 		133B63D320413A03006DDB15 /* Aurora */ = {
 			isa = PBXGroup;
 			children = (
+				133B641120417360006DDB15 /* OCR.mlmodel */,
+				133B640920416E07006DDB15 /* Inceptionv3.mlmodel */,
 				133B640720414651006DDB15 /* Resnet50.mlmodel */,
+				133B640D20416E15006DDB15 /* SqueezeNet.mlmodel */,
+				133B640B20416E0E006DDB15 /* MobileNet.mlmodel */,
+				133B640F20416FCC006DDB15 /* VGG16.mlmodel */,
 				133B64052041463B006DDB15 /* GoogLeNetPlaces.mlmodel */,
 				133B63D420413A03006DDB15 /* AppDelegate.swift */,
 				133B63D620413A03006DDB15 /* ViewController.swift */,
@@ -261,7 +276,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				133B641020416FCD006DDB15 /* VGG16.mlmodel in Sources */,
+				133B641220417361006DDB15 /* OCR.mlmodel in Sources */,
+				133B640A20416E07006DDB15 /* Inceptionv3.mlmodel in Sources */,
 				133B63D720413A03006DDB15 /* ViewController.swift in Sources */,
+				133B640C20416E0E006DDB15 /* MobileNet.mlmodel in Sources */,
+				133B640E20416E15006DDB15 /* SqueezeNet.mlmodel in Sources */,
 				133B63D520413A03006DDB15 /* AppDelegate.swift in Sources */,
 				133B640820414651006DDB15 /* Resnet50.mlmodel in Sources */,
 				133B64062041463B006DDB15 /* GoogLeNetPlaces.mlmodel in Sources */,
@@ -423,7 +443,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 43XKYX9XZ9;
 				INFOPLIST_FILE = Aurora/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = HTVII.Aurora;
@@ -438,7 +458,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 43XKYX9XZ9;
 				INFOPLIST_FILE = Aurora/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = HTVII.Aurora;

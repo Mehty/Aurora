@@ -10,8 +10,9 @@ import UIKit
 import AVFoundation
 import Vision
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDelegate {
     
+    /*
     // 2) access the AVSpeechSynthesizer Class
     let speakTalk = AVSpeechSynthesizer()
     
@@ -37,13 +38,24 @@ class ViewController: UIViewController {
         speakTalk.speak(speakText)
         speakTalk.speak(Aurora)
         
-    }
+    }  */
 
+    let label: UILabel = {
+        let label = UILabel()
+        label.textColor = .white
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "Label"
+        label.font = label.font.withSize(30)
+        return label
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         setupCaptureSession()
+        
+        view.addSubview(label)
+        setupLabel()
     }
 
     override func didReceiveMemoryWarning() {
@@ -70,7 +82,8 @@ class ViewController: UIViewController {
     
         // setup output, add output to our capture session
         let captureOutput = AVCaptureVideoDataOutput()
-        captureOutput.setSampleBufferDelegate(self, queue: DispatchQueue(label: "videoQueue"))
+        captureOutput.videoSettings = [kCVPixelBufferPixelFormatTypeKey as String: Int(kCVPixelFormatType_32BGRA)]
+        captureOutput.setSampleBufferDelegate(self, queue: DispatchQueue.global(qos: DispatchQoS.QoSClass.default))
         captureSession.addOutput(captureOutput)
         
         let previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
@@ -82,19 +95,43 @@ class ViewController: UIViewController {
     }
     
     func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
-        guard let model = try? VNCoreMLModel(for: Resnet50().model) else { return }
+        guard let model = try? VNCoreMLModel(for: MobileNet().model) else { return }
+        // 2) access the AVSpeechSynthesizer Class
+        let speakTalk = AVSpeechSynthesizer()
+        
         let request = VNCoreMLRequest(model: model) { (finishedRequest, error) in
-            guard let results = finishedRequest.results as? [VNClassificationObservation] else { return }
-            guard let Observation = results.first else { return }
+            guard let results = finishedRequest.results //as? [VNClassificationObservation]
+                else { return }
+            guard let Observation = results.first
+                .flatMap({ $0 as? VNClassificationObservation })
+                else { return }
+            let classifications = results[0...4]
+                .flatMap({ $0 as? VNClassificationObservation })
+                .filter({ $0.confidence > 0.5 })
+                .map {
+                    (prediction: VNClassificationObservation) -> String in
+                    return "\(round(prediction.confidence * 100 * 100)/100)%: \(prediction.identifier)"
+            }
             
             DispatchQueue.main.async(execute: {
-                self.label.text = "\(Observation.identifier)"
+                var obj = ""   
+                if Observation.confidence > 0.5 {
+                    obj = Observation.identifier
+                }
+                let talk = AVSpeechUtterance(string: obj)
+                self.label.text = classifications.joined(separator: "\n")    //"\(Observation.identifier)"
+                speakTalk.speak(talk)
             })
         }
         guard let pixelBuffer: CVPixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer) else { return }
         
         // executes request
         try? VNImageRequestHandler(cvPixelBuffer: pixelBuffer, options: [:]).perform([request])
+    }
+    
+    func setupLabel() {
+        label.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        label.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -50).isActive = true
     }
     
 }
